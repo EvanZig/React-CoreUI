@@ -33,17 +33,6 @@ export default function App() {
     console.log(formCredentials)
   }
 
-  const phoneInput = (event) => {
-    console.log(formCredentials)
-    setFormCredentials( prevState => {
-      return {
-        ...prevState,
-        phone: event.target.value
-      }
-    })
-    console.log(formCredentials)
-  }
-
   const signUpClicked = async () => {
 
   }
