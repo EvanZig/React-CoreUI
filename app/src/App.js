@@ -1,6 +1,6 @@
 import React from 'react'
 import formik from "formik"
-import { CForm, CFormLabel,CButton,CFormInput,CFormText,CInputGroup, CCardBody, CSpinner } from '@coreui/react'
+import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
