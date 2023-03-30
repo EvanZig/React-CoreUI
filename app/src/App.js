@@ -25,14 +25,26 @@ export default function App() {
     console.log("clicked")
   }
 
+  const handleInput = (event) => {
+    setFormCredentials( prevState => {
+      return {...prevState,
+      [event.target.name]: event.target.value,}
+    })
+    console.log(formCredentials)
+  }
+
+  const phoneInput = (event) => {
+    console.log(formCredentials)
+    setFormCredentials( prevState => {
+      return {
+        ...prevState,
+        phone: event.target.value
+      }
+    })
+    console.log(formCredentials)
+  }
+
   const signUpClicked = async () => {
-    // const body = {
-    //   firstName: firstname,
-    //   lastName: lastname,
-    //   email: email,
-    //   phone: phone,
-    //   password: password,
-    // }
 
   }
 
@@ -49,6 +61,8 @@ export default function App() {
         placeholder="First name"
         className="light-background"
         name = "firstName"
+        value = {formCredentials.firstName}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -57,6 +71,8 @@ export default function App() {
         placeholder="Last name"
         className="light-background"
         name = "lastName"
+        value = {formCredentials.lastName}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -66,6 +82,8 @@ export default function App() {
         placeholder= "E-mail"
         className="light-background"
         name = "email"
+        value = {formCredentials.email}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -75,6 +93,8 @@ export default function App() {
         placeholder= "Password"
         className="light-background"
         name = "password"
+        value = {formCredentials.password}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -90,7 +110,14 @@ export default function App() {
         <CInputGroup className="mb-4">
         <PhoneInput
           country={'ch'}
-          name ="phone"
+          value = {formCredentials.phone}
+          onChange={(value)=>{
+            setFormCredentials(prevState => {
+              return {
+                ...prevState,
+                phone: value,
+              }})
+          }}
         />
         </CInputGroup>
         <CButton
