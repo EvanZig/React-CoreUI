@@ -48,6 +48,7 @@ export default function App() {
         <CFormInput
         placeholder="First name"
         className="light-background"
+        name = "firstName"
         />
         </CInputGroup>
 
@@ -55,6 +56,7 @@ export default function App() {
         <CFormInput
         placeholder="Last name"
         className="light-background"
+        name = "lastName"
         />
         </CInputGroup>
 
@@ -63,6 +65,7 @@ export default function App() {
         type="email"
         placeholder= "E-mail"
         className="light-background"
+        name = "email"
         />
         </CInputGroup>
 
@@ -71,6 +74,7 @@ export default function App() {
         type="password"
         placeholder= "Password"
         className="light-background"
+        name = "password"
         />
         </CInputGroup>
 
@@ -79,12 +83,14 @@ export default function App() {
           type="password"
           placeholder="Confirm Password"
           className="light-background"
+          name ="confirmPassword"
         />
         </CInputGroup>
 
         <CInputGroup className="mb-4">
         <PhoneInput
           country={'ch'}
+          name ="phone"
         />
         </CInputGroup>
         <CButton
