@@ -1,15 +1,39 @@
-import React from 'react'
+import React, {useState} from 'react'
 import formik from "formik"
 import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
 
 export default function App() {
+  const {password, setPassword, passwordIsValid} = useValidPassword('')
+  const {email, setEmail, emailIsValid} = useValidEmail('')
+  const {username, setUsername, usernameIsValid} = useValidUsername('')
 
+  const [formCredentials, setFormCredentials] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: 0,
+    password: "",
+  })
+
+  const isSpinnerVisible = false
 
   const openLoginModal = () =>{
     console.log("clicked")
+  }
+
+  const signUpClicked = async () => {
+    // const body = {
+    //   firstName: firstname,
+    //   lastName: lastname,
+    //   email: email,
+    //   phone: phone,
+    //   password: password,
+    // }
+
   }
 
   return (
@@ -65,15 +89,12 @@ export default function App() {
         </CInputGroup>
         <CButton
         // disabled={isValid}
-        // onClick={signUpClicked}
+        onClick={signUpClicked}
         className="px-4 mb-4 text-white bg-black"
         >
-        {/* {isSpinnerVisible ? (
+        {isSpinnerVisible ? (
           <CSpinner color="warning" variant="grow" size="sm" />
-        ) : (
-          t('Authentication.Register.Button.REGISTER')
-        )} */}
-        <CSpinner color="warning" variant="grow" size="sm" />
+        ) : '' }
         Register
       </CButton>
 
