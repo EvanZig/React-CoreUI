@@ -9,14 +9,14 @@ import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
 export default function App() {
   const {password, setPassword, passwordIsValid} = useValidPassword('')
   const {email, setEmail, emailIsValid} = useValidEmail('')
-  const {username, setUsername, usernameIsValid} = useValidUsername('')
+  // const {username, setUsername, usernameIsValid} = useValidUsername('')
 
   const [formCredentials, setFormCredentials] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: email,
     phone: 0,
-    password: "",
+    password: password,
   })
 
   const isSpinnerVisible = false
@@ -26,10 +26,17 @@ export default function App() {
   }
 
   const handleInput = (event) => {
+    if(event.target.name==="email"){
+      setEmail(event.target.value)
+    }
+    else if(event.target.name === "password"){
+      setPassword(event.target.value)
+    }
+    else{
     setFormCredentials( prevState => {
       return {...prevState,
       [event.target.name]: event.target.value,}
-    })
+    })}
     console.log(formCredentials)
   }
 
@@ -50,7 +57,6 @@ export default function App() {
         placeholder="First name"
         className="light-background"
         name = "firstName"
-        value = {formCredentials.firstName}
         onChange={handleInput}
         />
         </CInputGroup>
@@ -60,7 +66,6 @@ export default function App() {
         placeholder="Last name"
         className="light-background"
         name = "lastName"
-        value = {formCredentials.lastName}
         onChange={handleInput}
         />
         </CInputGroup>
@@ -71,7 +76,6 @@ export default function App() {
         placeholder= "E-mail"
         className="light-background"
         name = "email"
-        value = {formCredentials.email}
         onChange={handleInput}
         />
         </CInputGroup>
@@ -82,7 +86,6 @@ export default function App() {
         placeholder= "Password"
         className="light-background"
         name = "password"
-        value = {formCredentials.password}
         onChange={handleInput}
         />
         </CInputGroup>

@@ -17,6 +17,7 @@ export const useValidPassword = (value) => {
         
         const isValid = passwordSchema.isValidSync({password})
         setPasswordIsValid(isValid)
+        console.log(passwordIsValid)
     }, [password])
 
     return { password, setPassword, passwordIsValid }
@@ -38,23 +39,24 @@ export const useValidEmail = (value) => {
 
         const isValid = emailSchema.isValidSync({email})
         setEmailIsValid(isValid)
+        console.log(emailIsValid)
     }, [email])
 
     return { email, setEmail, emailIsValid }
 }
 
-export const useValidUsername = (value) => {
-    const [username, setUsername] = useState(value)
-    const [usernameIsValid, setUsernameIsValid] = useState(true)
+// export const useValidUsername = (value) => {
+//     const [username, setUsername] = useState(value)
+//     const [usernameIsValid, setUsernameIsValid] = useState(true)
         
-    useEffect((value) => {
-        const usernameSchema = yup.object().shape({
-            username: yup.string().email().required(),
-        })
+//     useEffect((value) => {
+//         const usernameSchema = yup.object().shape({
+//             username: yup.string().email().required(),
+//         })
 
-        const isValid = usernameSchema.isValidSync({username})
-        setUsernameIsValid(isValid)
-    }, [username])
+//         const isValid = usernameSchema.isValidSync({username})
+//         setUsernameIsValid(isValid)
+//     }, [username])
 
-    return {username, setUsername, usernameIsValid }
-}
+//     return {username, setUsername, usernameIsValid }
+// }
