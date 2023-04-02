@@ -8,9 +8,6 @@ import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
 import { mySchema } from './schema/mySchema';
 
 export default function App() {
-  const {password, setPassword, passwordIsValid} = useValidPassword('')
-  const {email, setEmail, emailIsValid} = useValidEmail('')
-  // const {username, setUsername, usernameIsValid} = useValidUsername('')
 
     const onSubmit = (values,actions) =>{
       console.log(values)
