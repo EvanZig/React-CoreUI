@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import formik, { useFormik } from "formik"
-import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner } from '@coreui/react'
+import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner, CRow,CCol } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
 import { mySchema } from './schema/mySchema';
+import signupBackgroundImage from './images/bg-signup.png'
 
 export default function App() {
 
@@ -34,6 +35,10 @@ export default function App() {
   }
 
   return (
+    <CRow className="justify-content-center">
+    <CCol style={{
+          backgroundImage: `url(${signupBackgroundImage})` }}></CCol>
+    <CCol className='col-lg-7'>
     <CForm onSubmit={registerForm.handleSubmit}>
 
         <CCardBody className="m-5 p-xl-5">
@@ -108,6 +113,8 @@ export default function App() {
           country={'ch'}
         />
         </CInputGroup>
+
+        <div className="d-flex justify-content-center align-items-end flex-column ">
         <CButton
         // disabled={isValid}
         type="submit"
@@ -118,6 +125,7 @@ export default function App() {
         ) : '' }
         Register
       </CButton>
+      </div>
 
       <CCardBody className="d-flex mb-3">
       <span>Already registered?</span>
@@ -132,6 +140,7 @@ export default function App() {
         </CCardBody>
 
     </CForm>
-
+    </CCol>
+    </CRow>
   )
 }
