@@ -1,3 +1,13 @@
 body {
   font-size: 16px;
 }
+
+input.input-error,
+select.input-error {
+  border-color: #fc8181;
+}
+
+.error{
+  margin-top: -20px;
+  font-size: 14px;
+}

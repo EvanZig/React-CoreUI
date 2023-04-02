@@ -1,43 +1,51 @@
 import React, {useState} from 'react'
-import formik, { useFormik } from "formik"
+import formik from "formik"
 import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
-import { mySchema } from './schema/mySchema';
 
 export default function App() {
   const {password, setPassword, passwordIsValid} = useValidPassword('')
   const {email, setEmail, emailIsValid} = useValidEmail('')
   // const {username, setUsername, usernameIsValid} = useValidUsername('')
 
-    const onSubmit = (values,actions) =>{
-      console.log(values)
-      actions.resetForm()
-    }
+  const [formCredentials, setFormCredentials] = useState({
+    firstName: "",
+    lastName: "",
+    email: email,
+    phone: 0,
+    password: password,
+  })
 
-    const registerForm = useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password:"",
-        confirmPassword:"",
-      },
-      validationSchema: mySchema,
-      onSubmit,
-    })
-
-  
   const isSpinnerVisible = false
 
   const openLoginModal = () =>{
     console.log("clicked")
   }
 
+  const handleInput = (event) => {
+    if(event.target.name==="email"){
+      setEmail(event.target.value)
+    }
+    else if(event.target.name === "password"){
+      setPassword(event.target.value)
+    }
+    else{
+    setFormCredentials( prevState => {
+      return {...prevState,
+      [event.target.name]: event.target.value,}
+    })}
+    console.log(formCredentials)
+  }
+
+  const signUpClicked = async () => {
+
+  }
+
   return (
-    <CForm onSubmit={registerForm.handleSubmit}>
+    <CForm>
 
         <CCardBody className="m-5 p-xl-5">
         <div className="d-flex flex-column mb-4">
@@ -49,8 +57,7 @@ export default function App() {
         placeholder="First name"
         className="light-background"
         name = "firstName"
-        value = {registerForm.values.firstName}
-        onChange={registerForm.handleChange}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -59,8 +66,7 @@ export default function App() {
         placeholder="Last name"
         className="light-background"
         name = "lastName"
-        value = {registerForm.values.lastName}
-        onChange={registerForm.handleChange}
+        onChange={handleInput}
         />
         </CInputGroup>
 
@@ -68,52 +74,47 @@ export default function App() {
         <CFormInput
         type="email"
         placeholder= "E-mail"
-        // className="light-background"
+        className="light-background"
         name = "email"
-        value = {registerForm.values.email}
-        onChange={registerForm.handleChange}
-        onBlur={registerForm.handleBlur}
-        className={registerForm.errors.email && registerForm.touched.email ? "input-error" : ""}
+        onChange={handleInput}
         />
         </CInputGroup>
-        {registerForm.errors.email && registerForm.touched.email && <p className= "error">❌{registerForm.errors.email}</p>}
 
         <CInputGroup className="mb-4">
         <CFormInput
         type="password"
         placeholder= "Password"
+        className="light-background"
         name = "password"
-        value = {registerForm.values.password}
-        onChange={registerForm.handleChange}
-        onBlur={registerForm.handleBlur}
-        className={registerForm.errors.password && registerForm.touched.password ? "input-error" : ""}
+        onChange={handleInput}
         />
         </CInputGroup>
-        {registerForm.errors.password && registerForm.touched.password && <p className= "error">❌{registerForm.errors.password}</p>}
-
 
         <CInputGroup className="mb-4">
         <CFormInput
           type="password"
           placeholder="Confirm Password"
+          className="light-background"
           name ="confirmPassword"
-          value = {registerForm.values.confirmPassword}
-          onChange={registerForm.handleChange}
-          onBlur={registerForm.handleBlur}
-          className={registerForm.errors.confirmPassword && registerForm.touched.confirmPassword ? "input-error" : ""}
         />
         </CInputGroup>
-        {registerForm.errors.confirmPassword && registerForm.touched.confirmPassword && <p className= "error">❌{registerForm.errors.confirmPassword}</p>}
-
 
         <CInputGroup className="mb-4">
         <PhoneInput
           country={'ch'}
+          value = {formCredentials.phone}
+          onChange={(value)=>{
+            setFormCredentials(prevState => {
+              return {
+                ...prevState,
+                phone: value,
+              }})
+          }}
         />
         </CInputGroup>
         <CButton
         // disabled={isValid}
-        type="submit"
+        onClick={signUpClicked}
         className="px-4 mb-4 text-white bg-black"
         >
         {isSpinnerVisible ? (
