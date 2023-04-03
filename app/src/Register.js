@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useFormik } from "formik"
-import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner, CRow,CCol } from '@coreui/react'
+import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner, CRow,CCol, CModal, CCard } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { mySchema, passwordErrorsArray } from './schema/mySchema';
 import signupBackgroundImage from './images/bg-signup.png'
+import { GlobalVariables } from './modalContext';
+import {cilXCircle} from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 
-export default function App() {
+export default function Register() {
+    const globalVars = useContext(GlobalVariables)
+    globalVars.setRegisterModalVisibility(true)
 
     const onSubmit = (values,actions) =>{
       console.log(values)
@@ -32,7 +37,13 @@ export default function App() {
   const isSpinnerVisible = false
 
   const openLoginModal = () =>{
-    console.log("clicked")
+    globalVars.setRegisterModalVisible(false)
+    globalVars.setLoginModalVisibility(true)
+  }
+  
+  const closeModal = () => {
+    globalVars.setRegisterModalVisible(false)
+    globalVars.setLoginModalVisibility(true)
   }
 
   const passwordErros = passwordErrorsArray.map((value) => {
@@ -40,13 +51,34 @@ export default function App() {
   })
 
   return (
+    <div className={`flex-row ${globalVars.registerModalVisibility ? 'd-flex' : 'd-none'}`}>
+    <CModal
+    className="show d-block spartan-font"
+    backdrop={true}
+    keyboard={false}
+    portal={false}
+    size="xl"
+    visible={globalVars.registerModalVisibility}
+    onClose={() => closeModal()}
+    alignment="center"
+    style={{
+      backgroundImage: `url(${signupBackgroundImage})`,
+      backgroundSize: `cover`,
+      borderRadius: `0px`,
+    }}
+  >
     <CRow className="justify-content-center">
-    <CCol style={{
-          backgroundImage: `url(${signupBackgroundImage})`,
-          backgroundSize: 'cover',
-          borderRadius: '0px',
-          }}></CCol>
+    <CCol></CCol>
     <CCol className='col-lg-7'>
+    <CCard style={{ borderRadius: `0px`, height: '900px' }}>
+    <div className=" d-flex flex-row justify-content-end align-items-end m-3">
+    <CIcon
+      role="button"
+      icon={cilXCircle}
+      className="icon-xl"
+      onClick={() => closeModal()}
+    />
+    </div>
     <CForm onSubmit={registerForm.handleSubmit}>
 
         <CCardBody className="m-5 p-xl-5">
@@ -127,7 +159,9 @@ export default function App() {
           country={'ch'}
         />
         </CInputGroup>
-
+        
+        <CRow>
+        <CCol>
         <div className="d-flex justify-content-center align-items-end flex-column ">
         <CButton
         disabled={registerForm.isSubmitting}
@@ -140,21 +174,29 @@ export default function App() {
         Register
       </CButton>
       </div>
-
+      </CCol>
+      </CRow>
+      
+      <CRow>
       <CCardBody className="d-flex mb-3">
       <span>Already registered?</span>
       <span
         className="login-button-link px-4 link-dark fw-bolder"
         onClick={() => openLoginModal()}
+        style = {{
+            cursor: 'pointer',
+        }}
       >
         Login
       </span>
-      </CCardBody>
-
-        </CCardBody>
-
-    </CForm>
-    </CCol>
-    </CRow>
+                </CCardBody>
+              </CRow>
+            </CCardBody>
+          </CForm>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CModal>
+    </div>
   )
 }

@@ -1,11 +1,17 @@
-import React from "react"
+import React, { useContext } from "react"
 import { CForm,CButton,CInputGroup, CCardBody, CSpinner, CRow,CCol, CCard, CIcon,CFormInput, CModal } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import loginBackgroundImage from './images/bg-login.png'
+import { GlobalVariables } from "./modalContext";
 
 export default function Login(){
-    const modalVisibility = true;
+    const globalVars = useContext(GlobalVariables)
     const isSpinnerVisible = false;
+
+    const openRegisterModal = () => {
+        globalVars.setLoginModalVisibility(false)
+        globalVars.setRegisterModalVisibility(true)
+    }
 
     return (
         <CModal
@@ -15,7 +21,7 @@ export default function Login(){
         portal={false}
         size="xl"
         // onClose={() => closeModal()}
-        visible={modalVisibility}
+        visible={globalVars.loginModalVisibility}
         alignment="center"
         style={{
           backgroundImage: `url(${loginBackgroundImage})`,
@@ -80,7 +86,10 @@ export default function Login(){
                       <span>New to Cubotoo?</span>
                       <span
                         className="login-button-link px-4 link-dark fw-bolder"
-                        // onClick={() => openRegisterModal()}
+                        style = {{
+                            cursor: 'pointer',
+                        }}
+                        onClick={() => openRegisterModal()}
                       >
                         Sign up
                       </span>
