@@ -1,10 +1,9 @@
-import React, {useState} from 'react'
-import formik, { useFormik } from "formik"
+import React from 'react'
+import { useFormik } from "formik"
 import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner, CRow,CCol } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
 import { mySchema, passwordErrorsArray } from './schema/mySchema';
 import signupBackgroundImage from './images/bg-signup.png'
 
@@ -43,7 +42,8 @@ export default function App() {
   return (
     <CRow className="justify-content-center">
     <CCol style={{
-          backgroundImage: `url(${signupBackgroundImage})` }}></CCol>
+          backgroundImage: `url(${signupBackgroundImage})`,
+          height: '850px' }}></CCol>
     <CCol className='col-lg-7'>
     <CForm onSubmit={registerForm.handleSubmit}>
 
@@ -55,22 +55,28 @@ export default function App() {
         <CInputGroup className="mb-4">
         <CFormInput
         placeholder="First name"
-        className="light-background"
+        // className="light-background"
         name = "firstName"
         value = {registerForm.values.firstName}
         onChange={registerForm.handleChange}
+        onBlur={registerForm.handleBlur}
+        className={registerForm.errors.firstName && registerForm.touched.firstName ? "input-error" : ""}
         />
         </CInputGroup>
+        {registerForm.errors.firstName && registerForm.touched.firstName && <p className= "error">❌{registerForm.errors.firstName}</p>}
 
         <CInputGroup className="mb-4">
         <CFormInput
         placeholder="Last name"
-        className="light-background"
+        // className="light-background"
         name = "lastName"
         value = {registerForm.values.lastName}
         onChange={registerForm.handleChange}
+        onBlur={registerForm.handleBlur}
+        className={registerForm.errors.lastName && registerForm.touched.lastName ? "input-error" : ""}
         />
         </CInputGroup>
+        {registerForm.errors.lastName && registerForm.touched.lastName && <p className= "error">❌{registerForm.errors.lastName}</p>}
 
         <CInputGroup className="mb-4">
         <CFormInput
