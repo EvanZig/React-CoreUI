@@ -1,18 +1,28 @@
 import React from "react"
-import { CForm,CButton,CInputGroup, CCardBody, CSpinner, CRow,CCol, CCard, CIcon,CFormInput } from '@coreui/react'
+import { CForm,CButton,CInputGroup, CCardBody, CSpinner, CRow,CCol, CCard, CIcon,CFormInput, CModal } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css';
 import loginBackgroundImage from './images/bg-login.png'
 
 export default function Login(){
-
+    const modalVisibility = true;
     const isSpinnerVisible = false;
 
     return (
-        <div style={{
-            backgroundImage: `url(${loginBackgroundImage})`,
-            backgroundSize: `cover`,
-            borderRadius: `0px`,
-          }}>
+        <CModal
+        className="show d-block spartan-font"
+        backdrop={true}
+        keyboard={false}
+        portal={false}
+        size="xl"
+        // onClose={() => closeModal()}
+        visible={modalVisibility}
+        alignment="center"
+        style={{
+          backgroundImage: `url(${loginBackgroundImage})`,
+          backgroundSize: `cover`,
+          borderRadius: `0px`,
+        }}
+      >
        <CRow className="justify-content-end">
           <CCol></CCol>
           <CCol className="col-lg-7">
@@ -81,6 +91,6 @@ export default function Login(){
             </CCard>
           </CCol>
         </CRow>
-        </div>
+        </CModal>
     )
 }
