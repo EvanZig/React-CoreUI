@@ -5,14 +5,16 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useValidEmail, useValidPassword, useValidUsername } from './FormAuth';
-import { mySchema } from './schema/mySchema';
+import { mySchema, passwordErrorsArray } from './schema/mySchema';
 import signupBackgroundImage from './images/bg-signup.png'
 
 export default function App() {
 
     const onSubmit = (values,actions) =>{
       console.log(values)
-      actions.resetForm()
+      setTimeout(() => {
+        actions.resetForm()
+      }, 1000)
     }
 
     const registerForm = useFormik({
@@ -33,6 +35,10 @@ export default function App() {
   const openLoginModal = () =>{
     console.log("clicked")
   }
+
+  const passwordErros = passwordErrorsArray.map((value) => {
+  return <span>❌{value} <br /></span>
+  })
 
   return (
     <CRow className="justify-content-center">
@@ -91,7 +97,7 @@ export default function App() {
         className={registerForm.errors.password && registerForm.touched.password ? "input-error" : ""}
         />
         </CInputGroup>
-        {registerForm.errors.password && registerForm.touched.password && <p className= "error">❌{registerForm.errors.password}</p>}
+        {registerForm.errors.password && registerForm.touched.password && <p className= "error">{passwordErros}</p>}
 
 
         <CInputGroup className="mb-4">
@@ -116,7 +122,7 @@ export default function App() {
 
         <div className="d-flex justify-content-center align-items-end flex-column ">
         <CButton
-        // disabled={isValid}
+        disabled={registerForm.isSubmitting}
         type="submit"
         className="px-4 mb-4 text-white bg-black"
         >
