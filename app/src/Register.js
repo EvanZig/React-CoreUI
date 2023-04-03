@@ -43,7 +43,9 @@ export default function App() {
     <CRow className="justify-content-center">
     <CCol style={{
           backgroundImage: `url(${signupBackgroundImage})`,
-          height: '850px' }}></CCol>
+          backgroundSize: 'cover',
+          borderRadius: '0px',
+          }}></CCol>
     <CCol className='col-lg-7'>
     <CForm onSubmit={registerForm.handleSubmit}>
 
