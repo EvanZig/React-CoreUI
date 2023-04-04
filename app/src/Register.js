@@ -4,7 +4,7 @@ import { CForm,CButton,CFormInput,CInputGroup, CCardBody, CSpinner, CRow,CCol, C
 import '@coreui/coreui/dist/css/coreui.min.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { mySchema, passwordErrorsArray } from './schema/mySchema';
+import { mySchema, passwordErros } from './schema/mySchema';
 import signupBackgroundImage from './images/bg-signup.png'
 import { GlobalVariables } from './modalContext';
 import {cilXCircle} from '@coreui/icons'
@@ -44,10 +44,6 @@ export default function Register() {
     globalVars.setRegisterModalVisibility(false)
     globalVars.setLoginModalVisibility(true)
   }
-
-  const passwordErros = passwordErrorsArray.map((value) => {
-  return <span>❌{value} <br /></span>
-  })
 
   return (
     <div className={`flex-row ${globalVars.registerModalVisibility ? 'd-flex' : 'd-none'}`}>

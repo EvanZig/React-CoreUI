@@ -11,4 +11,8 @@ export const mySchema = yup.object().shape({
     confirmPassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match").required(),
 })
 
-export const passwordErrorsArray = passwordError.split("\n")
+const passwordErrorsArray = passwordError.split("\n")
+
+export const passwordErros = passwordErrorsArray.map((value, index) => {
+  return <span key ={index}>❌{value} <br /></span>
+  })
