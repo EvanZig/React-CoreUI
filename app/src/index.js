@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
   <GlobalVariablesWraper>
   <Register />
-  {/* <Login /> */}
+  <Login />
   </GlobalVariablesWraper>
   </React.StrictMode>
 );

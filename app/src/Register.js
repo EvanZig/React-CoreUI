@@ -12,7 +12,6 @@ import CIcon from '@coreui/icons-react'
 
 export default function Register() {
     const globalVars = useContext(GlobalVariables)
-    globalVars.setRegisterModalVisibility(true)
 
     const onSubmit = (values,actions) =>{
       console.log(values)
@@ -37,12 +36,12 @@ export default function Register() {
   const isSpinnerVisible = false
 
   const openLoginModal = () =>{
-    globalVars.setRegisterModalVisible(false)
+    globalVars.setRegisterModalVisibility(false)
     globalVars.setLoginModalVisibility(true)
   }
   
   const closeModal = () => {
-    globalVars.setRegisterModalVisible(false)
+    globalVars.setRegisterModalVisibility(false)
     globalVars.setLoginModalVisibility(true)
   }
 
